@@ -154,4 +154,3 @@ prediction = model.predict(input_df)[0]
 st.subheader(f"Estimated Calories Burned: {prediction:.2f} kcal")
 
 
-!streamlit run /usr/local/lib/python3.12/dist-packages/colab_kernel_launcher.py
