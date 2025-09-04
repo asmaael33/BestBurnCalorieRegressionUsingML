@@ -1,14 +1,4 @@
-﻿# 📦 Step 1: Import libraries
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error
-import matplotlib.pyplot as plt
-
-# 📁 Step 2: Load or simulate dataset
-# You can replace this with a real dataset later
-np.random.seed(42)
+﻿np.random.seed(42)
 n_samples = 500
 data = pd.DataFrame({
     'Age': np.random.randint(18, 60, n_samples),
