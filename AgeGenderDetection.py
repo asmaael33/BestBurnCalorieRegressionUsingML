@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 import os
-assert os.path.exists('models/deploy_age.prototxt'), "Model file missing!"
+assert os.path.exists('./models/deploy_age.prototxt'), "Model file missing!"
 
 
 AGE_BUCKETS = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
