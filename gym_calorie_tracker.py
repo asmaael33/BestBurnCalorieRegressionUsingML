@@ -8,14 +8,14 @@ import streamlit_authenticator as stauth
 
 
 # List of plain text passwords
-#passwords = ['morocco123', '1234']
+passwords = ['morocco123', '1234']
 
 # Generate hashed passwords
-#hashed_passwords = stauth.Hasher(passwords).generate()
+hashed_passwords = stauth.Hasher(passwords).generate()
 
 # Print them out
-#for i, hashed in enumerate(hashed_passwords):
-#    print(f"User {i+1} hashed password: {hashed}")
+for i, hashed in enumerate(hashed_passwords):
+    print(f"User {i+1} hashed password: {hashed}")
 
 
 # Load credentials from config.yaml
