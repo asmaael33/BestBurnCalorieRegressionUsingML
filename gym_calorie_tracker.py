@@ -4,7 +4,6 @@ import yaml
 from yaml.loader import SafeLoader
 import pandas as pd
 import datetime
-import streamlit_authenticator as stauth
 
 
 # List of plain text passwords
