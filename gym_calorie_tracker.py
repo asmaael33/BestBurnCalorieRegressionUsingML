@@ -1,39 +1,34 @@
 ﻿import streamlit as st
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
 import pandas as pd
 import datetime
-import matplotlib.pyplot as plt
-from user_db import USER_DB
 
+# Load credentials from config.yaml
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
-# -------------------------------
-# Initialize session state
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-    st.session_state.nickname = ""
-    st.session_state.history = pd.DataFrame(columns=["Date", "Calories"])
+# Initialize authenticator
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days']
+)
 
-# -------------------------------
-# Login screen
-def login():
-    st.title("🏋️‍♀️ Gym Calorie Tracker Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    nickname = st.text_input("Nickname")
+# Login widget
+authenticator.login()
 
-    if st.button("Login"):
-        user = USER_DB.get(username)
-        if user and user["password"] == password and user["nickname"] == nickname:
-            st.session_state.logged_in = True
-            st.session_state.nickname = nickname
-            st.success(f"Welcome back, {nickname}!")
-        else:
-            st.error("Invalid credentials or nickname.")
-
-# -------------------------------
-# Main app
-def main_app():
-    st.title(f"🔥 Welcome {st.session_state.nickname}!")
+# Access control
+if st.session_state["authentication_status"]:
+    authenticator.logout("Logout", "sidebar")
+    st.title(f"🔥 Welcome {st.session_state['name']}!")
     st.markdown("Enter your gym session details to calculate calories burned:")
+
+    # Initialize history
+    if "history" not in st.session_state:
+        st.session_state.history = pd.DataFrame(columns=["Date", "Calories"])
 
     # Input sliders
     age = st.slider("Age", 13, 90, 30)
@@ -66,9 +61,7 @@ def main_app():
     else:
         st.info("No data for selected date.")
 
-# -------------------------------
-# Run app
-if not st.session_state.logged_in:
-    login()
-else:
-    main_app()
+elif st.session_state["authentication_status"] is False:
+    st.error("Username/password is incorrect")
+elif st.session_state["authentication_status"] is None:
+    st.warning("Please enter your username and password")
