@@ -8,8 +8,8 @@ GENDER_LIST = ['Male', 'Female']
 
 @st.cache_resource
 def load_models():
-    age_net = cv2.dnn.readNetFromCaffe('deploy_age.prototxt', 'age_net.caffemodel')
-    gender_net = cv2.dnn.readNetFromCaffe('deploy_gender.prototxt', 'gender_net.caffemodel')
+    age_net = cv2.dnn.readNetFromCaffe('models/deploy_age.prototxt', 'models/age_net.caffemodel')
+    gender_net = cv2.dnn.readNetFromCaffe('models/deploy_gender.prototxt', 'models/gender_net.caffemodel')
     return age_net, gender_net
 
 def predict(image, age_net, gender_net):
