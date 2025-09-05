@@ -6,8 +6,12 @@ import pandas as pd
 import datetime
 
 # Load credentials from config.yaml
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
+with open("config.yaml", "r", encoding="utf-8", errors="replace") as f:
+    content = f.read()
+
+with open("config.yaml", "w", encoding="utf-8") as f:
+    f.write(content)
+
 
 # Initialize authenticator
 authenticator = stauth.Authenticate(
