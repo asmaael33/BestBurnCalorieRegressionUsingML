@@ -1,0 +1,10 @@
+credentials:
+  usernames:
+    asmaa:
+      email: asmaa@example.com
+      name: Asmâa
+      password: $2b$12$Wiq2qDINo4eSEdWizFDT3u4ROyYJNR9B9mwzHA49U6DbN/NGwAEOS  # hashed
+cookie:
+  expiry_days: 30
+  key: random_signature_key
+  name: streamlit_auth_cookie
