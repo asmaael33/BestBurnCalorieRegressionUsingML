@@ -4,7 +4,30 @@ import numpy as np
 from PIL import Image
 
 import os
-assert os.path.exists('./models/deploy_age.prototxt'), "Model file missing!"
+import urllib.request
+
+def download_if_missing(url, dest_path):
+    if not os.path.exists(dest_path):
+        print(f"Downloading {dest_path}...")
+        urllib.request.urlretrieve(url, dest_path)
+        print("Download complete.")
+
+AGE_PROTO_URL = "https://raw.githubusercontent.com/spmallick/learnopencv/master/AgeGender/deploy_age.prototxt"
+AGE_MODEL_URL = "https://github.com/spmallick/learnopencv/raw/master/AgeGender/age_net.caffemodel"
+GENDER_PROTO_URL = "https://raw.githubusercontent.com/spmallick/learnopencv/master/AgeGender/deploy_gender.prototxt"
+GENDER_MODEL_URL = "https://github.com/spmallick/learnopencv/raw/master/AgeGender/gender_net.caffemodel"
+
+
+def load_models():
+    download_if_missing(AGE_PROTO_URL, "models/deploy_age.prototxt")
+    download_if_missing(AGE_MODEL_URL, "models/age_net.caffemodel")
+    download_if_missing(GENDER_PROTO_URL, "models/deploy_gender.prototxt")
+    download_if_missing(GENDER_MODEL_URL, "models/gender_net.caffemodel")
+
+    age_net = cv2.dnn.readNetFromCaffe("models/deploy_age.prototxt", "models/age_net.caffemodel")
+    gender_net = cv2.dnn.readNetFromCaffe("models/deploy_gender.prototxt", "models/gender_net.caffemodel")
+    return age_net, gender_net
+
 
 
 AGE_BUCKETS = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
@@ -12,8 +35,8 @@ GENDER_LIST = ['Male', 'Female']
 
 @st.cache_resource
 def load_models():
-    age_net = cv2.dnn.readNetFromCaffe('models/deploy_age.prototxt', 'models/age_net.caffemodel')
-    gender_net = cv2.dnn.readNetFromCaffe('models/deploy_gender.prototxt', 'models/gender_net.caffemodel')
+    #age_net = cv2.dnn.readNetFromCaffe('models/deploy_age.prototxt', 'models/age_net.caffemodel')
+    #gender_net = cv2.dnn.readNetFromCaffe('models/deploy_gender.prototxt', 'models/gender_net.caffemodel')
     return age_net, gender_net
 
 def predict(image, age_net, gender_net):
