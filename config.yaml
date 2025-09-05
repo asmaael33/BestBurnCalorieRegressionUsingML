@@ -1,8 +1,8 @@
 credentials:
   usernames:
     asmaa:
-      email: asmaa@example.com
-      name: Asmâa
+      email: ajaxxx@example.com
+      name: Ajaxxx
       password: $2b$12$Wiq2qDINo4eSEdWizFDT3u4ROyYJNR9B9mwzHA49U6DbN/NGwAEOS  # hashed
 cookie:
   expiry_days: 30
