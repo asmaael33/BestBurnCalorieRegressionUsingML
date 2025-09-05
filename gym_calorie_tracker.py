@@ -16,6 +16,9 @@ import datetime
 #for i, hashed in enumerate(hashed_passwords):
 #    print(f"User {i+1} hashed password: {hashed}")
 
+passwd = stauth.Hasher(['ajaxxx']).generate()
+print(f"hashed password: {passwd}")
+
 
 # Load credentials from config.yaml
 with open('config.yaml') as file:
