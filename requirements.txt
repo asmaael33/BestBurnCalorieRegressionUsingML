@@ -5,3 +5,6 @@ numpy
 streamlit
 matplotlib
 streamlit-authenticator
+opencv-python-headless
+numpy
+Pillow
