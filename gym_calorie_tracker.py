@@ -2,13 +2,8 @@
 import pandas as pd
 import datetime
 import matplotlib.pyplot as plt
+from user_db import USER_DB
 
-# -------------------------------
-# Simulated user database
-USER_DB = {
-    "asmâa": {"password": "morocco123", "nickname": "FitQueen"},
-    "testuser": {"password": "1234", "nickname": "RunnerX"}
-}
 
 # -------------------------------
 # Initialize session state
