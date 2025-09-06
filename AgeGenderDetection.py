@@ -19,9 +19,9 @@ GENDER_MODEL_URL = "https://github.com/spmallick/learnopencv/raw/master/AgeGende
 
 
 def load_models():
-    download_if_missing(AGE_PROTO_URL, "models/deploy_age.prototxt")
+    download_if_missing(AGE_PROTO_URL, "models/age_deploy.prototxt")
     download_if_missing(AGE_MODEL_URL, "models/age_net.caffemodel")
-    download_if_missing(GENDER_PROTO_URL, "models/deploy_gender.prototxt")
+    download_if_missing(GENDER_PROTO_URL, "models/gender_deploy.prototxt")
     download_if_missing(GENDER_MODEL_URL, "models/gender_net.caffemodel")
 
     age_net = cv2.dnn.readNetFromCaffe("models/deploy_age.prototxt", "models/age_net.caffemodel")
